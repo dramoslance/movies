@@ -20,14 +20,14 @@ Movie Trailer Website allow users to see his favorites movies trailers and its m
 Several quick start options are available:
 
 * [Get latest python version](https://www.python.org/ftp/python/2.7.10/python-2.7.10.amd64.msi).
-* [Install Python enabling pip and configuring the path].
-* [Open Python GUI].
-* [Open fresh_tomatoes.py file].
-* [Run fresh_tomatoes.py file].
-* [Navigate through the website]
-* [Click on movies]
-* [Show trailer]
-* [Show information]
+* Install Python enabling pip and configuring the path.
+* Open Python GUI.
+* Open fresh_tomatoes.py file.
+* Run fresh_tomatoes.py file.
+* Navigate through the website.
+* Click on movies.
+* Show trailer.
+* Show information.
 
 
 ### What's included
