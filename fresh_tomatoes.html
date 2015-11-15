@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Fresh Tomatoes!</title>
+    <!-- Bootstrap 3 -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <style type="text/css" media="screen">
+        body {
+            padding-top: 80px;
+        }
+        #trailer .modal-dialog {
+            margin-top: 10px;
+            width: 640px;
+            height: 480px;
+        }
+        .hanging-close {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            z-index: 9001;
+        }
+        #trailer-video {
+            width: 100%;
+            height: 100%;
+        }
+        .movie-tile {
+            margin-bottom: 20px;
+            padding-top: 20px;
+        }
+        .movie-tile:hover {
+            background-color: #EEE;
+            cursor: pointer;
+        }
+        .scale-media {
+            padding-bottom: 56.25%;
+            position: relative;
+        }
+        .scale-media iframe {
+            border: none;
+            height: 100%;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            background-color: white;
+        }
+        .movie-information{
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 5px;
+        }
+        .movie-header-info{
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        @media only screen and (max-width:720px){
+            .modal{
+                width: 100%;
+            }
+            #trailer .modal-dialog{
+                width: 100%;
+            }            
+            .hanging-close{
+                right: 10px;
+            }
+        }
+    </style>
+    <script type="text/javascript" charset="utf-8">
+        // Pause the video when the modal is closed
+        $(document).on('click', '.hanging-close, .modal-backdrop', function (event) {
+            // Remove the src so the player itself gets removed, as this is the only
+            // reliable way to ensure the video stops playing in IE
+            $("#trailer-video-container").empty();
+        });
+        // Start playing the video whenever the trailer modal is opened
+        $(document).on('click', '.movie-tile', function (event) {
+
+            //Movie Fields
+            $("#trailer-video-container").empty();
+            $("#modal-movie-title").empty();
+            $("#modal-movie-synopsis-url").empty();
+            $("#modal-movie-story-line").empty();
+            $("#movie-price-value").empty();
+            $("#movie-date-value").empty();
+            
+            //Actor Fields
+            $("#modal-movie-actor-name").empty();
+            $("#movie-actor-gender-value").empty();
+            $("#movie-actor-nationality-value").empty();
+            $("#movie-actor-age-value").empty();
+
+            var trailerYouTubeId = $(this).attr('data-trailer-youtube-id');
+            var movieSynopsisUrl = $(this).attr('data-movie-synopsis-url');
+            var movieTitle = $(this).attr('data-movie-title');
+            var movieStoryLine = $(this).attr('data-movie-story-line');
+            var moviePrice = $(this).attr('data-movie-price');
+            var moviePublishmentDate = $(this).attr('data-movie-publishment-date');
+            var sourceUrl = 'http://www.youtube.com/embed/' + trailerYouTubeId + '?autoplay=1&html5=1';
+            $("#trailer-video-container").empty().append($("<iframe></iframe>", {
+              'id': 'trailer-video',
+              'type': 'text-html',
+              'src': sourceUrl,
+              'frameborder': 0
+            }));
+
+            var movieActorName = $(this).attr('data-movie-actor-name');
+            var movieActorGender = $(this).attr('data-movie-actor-gender');
+            var movieActorNationality = $(this).attr('data-movie-actor-nationality');
+            var movieActorAge = $(this).attr('data-movie-actor-age');
+    
+            $("#modal-movie-title").text(movieTitle);
+            $("#modal-movie-story-line").append(movieStoryLine+'<a id="modal-movie-synopsis-url" href="" target="_blank">...more</a>');
+            $("#movie-price-value").text(moviePrice);
+            $("#movie-date-value").text(moviePublishmentDate);
+            $("#modal-movie-synopsis-url").attr("href", movieSynopsisUrl);
+            
+
+            $("#modal-movie-actor-name").text(movieActorName);
+            $("#movie-actor-gender-value").text(movieActorGender);
+            $("#movie-actor-nationality-value").text(movieActorNationality);
+            $("#movie-actor-age-value").text(movieActorAge);
+
+        });
+        // Animate in the movies when the page loads
+        $(document).ready(function () {
+          $('.movie-tile').hide().first().show("fast", function showNext() {
+            $(this).next("div").show("fast", showNext);
+          });
+        });
+    </script>
+</head>
+
+  <body>
+    <!-- Trailer Video Modal -->
+    <div class="modal" id="trailer">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <a href="#" class="hanging-close" data-dismiss="modal" aria-hidden="true">
+            <img src="https://lh5.ggpht.com/v4-628SilF0HtHuHdu5EzxD7WRqOrrTIDi_MhEG6_qkNtUK5Wg7KPkofp_VJoF7RS2LhxwEFCO1ICHZlc-o_=s0#w=24&h=24"/>
+          </a>
+
+          <div id="carousel-movie" class="carousel slide" data-ride="carousel">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li data-target="#carousel-movie" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-movie" data-slide-to="1"></li>
+          </ol>
+
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <div class="scale-media" id="trailer-video-container">
+                </div>                
+            </div>
+            <div class="item">
+                <div class="movie-information">
+                    <h2 id="modal-movie-title"></h2>
+                    <div class="movie-header-info">Synopsis</div>
+                    <p id="modal-movie-story-line"></p>
+                    <div id="modal-movie-price"><span class="movie-header-info">Price:</span><span class="movie-value-info" id="movie-price-value"></span></div>
+                    <div id="modal-movie-publishment-date"><span class="movie-header-info">Publishment Date:</span><span class="movie-value-info" id="movie-date-value"></span></div>
+                    <div id="modal-actors">
+                        <h2 id="modal-movie-actor-name"></h2>
+                        <div id="modal-movie-actor-gender"><span class="movie-header-info">Gender:</span><span class="movie-value-info" id="movie-actor-gender-value"></span></div>
+                        <div id="modal-movie-actor-nationality"><span class="movie-header-info">Nationality:</span><span class="movie-value-info" id="movie-actor-nationality-value"></span></div>
+                        <div id="modal-movie-actor-age"><span class="movie-header-info">Age:</span><span class="movie-value-info" id="movie-actor-age-value"></span></div>
+                    </div>
+                </div>
+            </div>
+            ...
+          </div>
+
+          <!-- Controls -->
+          <a class="left carousel-control" href="#carousel-movie" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#carousel-movie" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+          
+        </div>
+      </div>
+    </div>
+    <!-- Main Page Content -->
+    <div class="container">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Movie Trailers Project</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      
+<div class="col-md-6 col-lg-4 movie-tile text-center" 
+    data-trailer-youtube-id="ctRK-4Vt7dA"
+    data-movie-synopsis-url="https://en.wikipedia.org/wiki/The_Green_Mile_(film)"
+    data-movie-title="The Green Mile"
+    data-movie-story-line="In a Louisiana nursing home in 1999, Paul Edgecomb becomes nervous while watching the 1935 film Top Hat. He is with his elderly friend Elaine, who becomes concerned, and Paul tells her that the film reminded him of his past, when he was a prison officer in charge of death row inmates at the Cold Mountain Penitentiary during the summer of 1935."
+    data-movie-price="13"
+    data-movie-publishment-date="1999"
+    data-movie-actor-name="Tom Hanks"
+    data-movie-actor-gender="male"
+    data-movie-actor-nationality="USA"
+    data-movie-actor-age="59"
+    data-toggle="modal"
+    data-target="#trailer">
+    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/ce/Green_mile.jpg/220px-Green_mile.jpg" width="220" height="342">
+    <h2>The Green Mile</h2>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" 
+    data-trailer-youtube-id="n-7K_OjsDCQ"
+    data-movie-synopsis-url="https://en.wikipedia.org/wiki/The_Hunger_Games:_Mockingjay_-_Part_2"
+    data-movie-title="The Hunger Games"
+    data-movie-story-line="With the nation of Panem in a full-scale revolutionary war, Katniss (Jennifer Lawrence) confronts President Snow (Donald Sutherland) in the final showdown. Teamed with a group of her closest friends – including Gale (Liam Hemsworth), Finnick (Sam Claflin), Cressida (Natalie Dormer) and Peeta (Josh Hutcherson) – Katniss goes off on a mission with the District 13 unit as they risk their lives to liberate the citizens of Panem, and stage an assassination attempt on President Snow who has become"
+    data-movie-price="5.6"
+    data-movie-publishment-date="2015"
+    data-movie-actor-name="Jennifer Lawrence"
+    data-movie-actor-gender="female"
+    data-movie-actor-nationality="USA"
+    data-movie-actor-age="25"
+    data-toggle="modal"
+    data-target="#trailer">
+    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/42/HungerGamesPoster.jpg/220px-HungerGamesPoster.jpg" width="220" height="342">
+    <h2>The Hunger Games</h2>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" 
+    data-trailer-youtube-id="5PSNL1qE6VY"
+    data-movie-synopsis-url="https://en.wikipedia.org/wiki/Avatar_(2009_film)"
+    data-movie-title="Avatar"
+    data-movie-story-line="By 2154, humans have depleted Earth's natural resources, leading to a severe energy crisis. The Resources Development Administration, RDA for short, mines for a valuable mineral – unobtanium – on Pandora, a densely forested habitable moon orbiting the gas giant Polyphemus in the Alpha Centauri star system.[10] Pandora, whose atmosphere is poisonous to humans, is inhabited by the Na'vi, 10-foot tall (3.0 m), blue-skinned, sapient humanoids[33] who live in harmony with nature and worship a mot"
+    data-movie-price="20.5"
+    data-movie-publishment-date="2009"
+    data-movie-actor-name="Zoe Saldaña"
+    data-movie-actor-gender="female"
+    data-movie-actor-nationality="USA"
+    data-movie-actor-age="37"
+    data-toggle="modal"
+    data-target="#trailer">
+    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/b0/Avatar-Teaser-Poster.jpg/220px-Avatar-Teaser-Poster.jpg" width="220" height="342">
+    <h2>Avatar</h2>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" 
+    data-trailer-youtube-id="e8UHUAdBl84"
+    data-movie-synopsis-url="https://en.wikipedia.org/wiki/Divergent_(film)"
+    data-movie-title="Divergent"
+    data-movie-story-line="In a futuristic dystopian Chicago, the society is divided into five factions: Abnegation (the selfless), Amity (the peaceful), Candor (the honest), Dauntless (the brave), and Erudite (the intellectual). The remaining population are the Factionless, who have no status or privilege in this society. When children reach the age of 16, they undergo a serum-induced psychological test which indicates their best-suited faction, then are allowed to choose any faction as their permanent group at the subse"
+    data-movie-price="15"
+    data-movie-publishment-date="2014"
+    data-movie-actor-name="Shailene Woodley"
+    data-movie-actor-gender="female"
+    data-movie-actor-nationality="USA"
+    data-movie-actor-age="23"
+    data-toggle="modal"
+    data-target="#trailer">
+    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Divergent.jpg/220px-Divergent.jpg" width="220" height="342">
+    <h2>Divergent</h2>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" 
+    data-trailer-youtube-id="FAfR8omt-CY"
+    data-movie-synopsis-url="https://en.wikipedia.org/wiki/Midnight_in_Paris"
+    data-movie-title="Midnight In Paris"
+    data-movie-story-line="Gil Pender, a successful but creatively unfulfilled Hollywood screenwriter, and his fiancée, Inez, are in Paris, vacationing with Inez's wealthy, conservative parents. Gil is struggling to finish his first novel, centered on a man who works in a nostalgia shop. Inez dismisses his ambition as a romantic daydream and encourages him to stick with lucrative screenwriting. Gil is considering moving to Paris (which he notes, much to the dismay of his fiancée, is at its most beautiful in the rain). I"
+    data-movie-price="18"
+    data-movie-publishment-date="2011"
+    data-movie-actor-name="Owen Wilson"
+    data-movie-actor-gender="male"
+    data-movie-actor-nationality="USA"
+    data-movie-actor-age="46"
+    data-toggle="modal"
+    data-target="#trailer">
+    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9f/Midnight_in_Paris_Poster.jpg/215px-Midnight_in_Paris_Poster.jpg" width="220" height="342">
+    <h2>Midnight In Paris</h2>
+</div>
+
+<div class="col-md-6 col-lg-4 movie-tile text-center" 
+    data-trailer-youtube-id="D9Omwylqs5A"
+    data-movie-synopsis-url="http://es.scribd.com/doc/62992293/Edge-of-the-Garden-Synopsis#scribd"
+    data-movie-title="Edge Of The Garden"
+    data-movie-story-line="A lonely businessman temporarily relocates to Maine after a bad breakup. He moves into a rundown cottage, where he meets the beautiful spirit of a woman who lived in the house fifty years before. As they form a friendship, they begin to help each other in ways they never knew were possible, and change both their fortunes forever."
+    data-movie-price="18"
+    data-movie-publishment-date="2011"
+    data-movie-actor-name="Rob Estes"
+    data-movie-actor-gender="male"
+    data-movie-actor-nationality="USA"
+    data-movie-actor-age="46"
+    data-toggle="modal"
+    data-target="#trailer">
+    <img src="http://www.cineol.net/galeria/carteles/bigtmp_25864.jpg" width="220" height="342">
+    <h2>Edge Of The Garden</h2>
+</div>
+
+    </div>
+  </body>
+</html>
