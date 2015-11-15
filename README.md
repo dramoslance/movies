@@ -43,9 +43,6 @@ movies/
 │  
 ```
 
-We provide compiled CSS and JS (`bootstrap.*`), as well as compiled and minified CSS and JS (`bootstrap.min.*`). CSS [source maps](https://developer.chrome.com/devtools/docs/css-preprocessors) (`bootstrap.*.map`) are available for use with certain browsers' developer tools. Fonts from Glyphicons are included, as is the optional Bootstrap theme.
-
-
 ## Community
 
 Get updates on Movie Trailer Website's development and chat with the project maintainers and community members.
