@@ -1,7 +1,30 @@
 import fresh_tomatoes
 import media
 
-titles = ["the green mile", "the hunger games", "avatar", "divergent", "midnight in paris", "edge of the garden"]
+
+
+"""entertainment_center.py: This script allows to create instances of movies an actors from static data.
+
+We have Movies features like:
+
+titles, prices, informations, trailers, posters, storylines, dates, 
+
+and Actors features like:
+
+name, genders, nationality, age
+
+
+__author__      = "Dayans R"
+__copyright__   = "Copyright 2015, Dram IT"
+
+"""
+
+titles = [
+    "the green mile",
+    "the hunger games", "avatar",
+    "divergent", "midnight in paris",
+    "edge of the garden"]
+
 prices = [13, 5.6, 20.5, 15, 18, 18]
 informations = [
     "https://en.wikipedia.org/wiki/The_Green_Mile_(film)",
@@ -19,11 +42,16 @@ trailers = [
     "https://www.youtube.com/watch?v=FAfR8omt-CY",
     "https://www.youtube.com/watch?v=D9Omwylqs5A"]
 posters = [
-    "https://upload.wikimedia.org/wikipedia/en/thumb/c/ce/Green_mile.jpg/220px-Green_mile.jpg",
-    "https://upload.wikimedia.org/wikipedia/en/thumb/4/42/HungerGamesPoster.jpg/220px-HungerGamesPoster.jpg",
-    "https://upload.wikimedia.org/wikipedia/en/thumb/b/b0/Avatar-Teaser-Poster.jpg/220px-Avatar-Teaser-Poster.jpg",
-    "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Divergent.jpg/220px-Divergent.jpg",
-    "https://upload.wikimedia.org/wikipedia/en/thumb/9/9f/Midnight_in_Paris_Poster.jpg/215px-Midnight_in_Paris_Poster.jpg",
+    ("https://upload.wikimedia.org/wikipedia/en/thumb/c/ce/Green_mile.jpg/"
+        "220px-Green_mile.jpg"),
+    ("https://upload.wikimedia.org/wikipedia/en/thumb/4/42/"
+        "HungerGamesPoster.jpg/220px-HungerGamesPoster.jpg"),
+    ("https://upload.wikimedia.org/wikipedia/en/thumb/b/b0/"
+        "Avatar-Teaser-Poster.jpg/220px-Avatar-Teaser-Poster.jpg"),
+    ("https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Divergent.jpg/"
+        "220px-Divergent.jpg"),
+    ("https://upload.wikimedia.org/wikipedia/en/thumb/9/9f/"
+        "Midnight_in_Paris_Poster.jpg/215px-Midnight_in_Paris_Poster.jpg"),
     "http://www.cineol.net/galeria/carteles/bigtmp_25864.jpg"]
 story_lines = [
     "In a Louisiana nursing home in 1999, Paul Edgecomb becomes nervous while watching the 1935 film Top Hat. He is with his elderly friend Elaine, who becomes concerned, and Paul tells her that the film reminded him of his past, when he was a prison officer in charge of death row inmates at the Cold Mountain Penitentiary during the summer of 1935.",
@@ -42,6 +70,9 @@ actors_ages = ["59", "25", "37", "23", "46", "46"]
 
 movies = []
 
+
+#Here we create movies and actors instances from previous defined data.
+#Moreover we append movies instances in a list.
 for i in range(len(titles)):
     current_movie = media.Movie()
     current_movie.set_title(titles[i].title())
@@ -56,4 +87,5 @@ for i in range(len(titles)):
     current_movie.set_actor(current_actor)
     movies.append(current_movie)        
 
+#Passing movies list to render in HTML structure.
 fresh_tomatoes.open_movies_page(movies)

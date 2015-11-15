@@ -2,7 +2,8 @@ import webbrowser
 
 
 class Movie:       
-    """This class represents movies entity, created to storage all information related."""
+    """This class represents movies entity, created to storage all information
+    related."""
     
     def __init__(self):
         """ Inits the movie instance."""
@@ -104,7 +105,8 @@ class Movie:
     def show_trailer(self):
         """Shows movie trailer in browser.
 
-        Use the corresponding youtube url to show movie trailer by using webbrowser
+        Use the corresponding youtube url to show movie trailer by
+        using webbrowser
 
         Args:
             None.

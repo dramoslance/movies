@@ -6,9 +6,6 @@ Movie Trailer Website allow users to see his favorites movies trailers and its m
 ## Table of contents
 
 * [Quick start](#quick-start)
-* [Bugs and feature requests](#bugs-and-feature-requests)
-* [Documentation](#documentation)
-* [Contributing](#contributing)
 * [Community](#community)
 * [Versioning](#versioning)
 * [Creators](#creators)
@@ -22,8 +19,8 @@ Several quick start options are available:
 * [Get latest python version](https://www.python.org/ftp/python/2.7.10/python-2.7.10.amd64.msi).
 * Install Python enabling pip and configuring the path.
 * Open Python GUI.
-* Open fresh_tomatoes.py file.
-* Run fresh_tomatoes.py file.
+* Open entertainment_center.py file.
+* Run entertainment_center.py file.
 * Navigate through the website.
 * Click on movies.
 * Show trailer.
