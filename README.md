@@ -7,7 +7,6 @@ Movie Trailer Website allow users to see his favorites movies trailers and its m
 
 * [Quick start](#quick-start)
 * [Community](#community)
-* [Versioning](#versioning)
 * [Creators](#creators)
 * [Copyright and license](#copyright-and-license)
 
